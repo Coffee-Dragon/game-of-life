@@ -3,6 +3,7 @@ const fieldFrag = document.createDocumentFragment();
 const cells = [];
 let liveOrDead = [];
 const rowLength = 10;
+let isIntervalOn = false;
 
 for (let i=0; i<100; i++) {
     const cell = document.createElement('div');
@@ -78,16 +79,59 @@ const nextStep = () => {
             cells[i].classList.remove('live');
         }
     }
+    let shouldStop = true;
+    let hasLiveCells = false;
+
+    for (let i = 0; i < nextAliveOrDead.length; i++) {
+        if (nextAliveOrDead[i] !== liveOrDead[i]) {
+            shouldStop = false;
+            
+        }
+        if (nextAliveOrDead[i]) {
+            hasLiveCells = true;
+        }
+    }
+    if (shouldStop || !hasLiveCells) {
+        clearInterval(intervalID);
+        isIntervalOn = false;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        pauseBtn.disabled = true;
+    }
+
     liveOrDead = nextAliveOrDead;
 }
 
 startBtn.addEventListener('click', () => {
     seedLife();
     intervalID = setInterval(nextStep, 1000);
+    isIntervalOn = true;
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    pauseBtn.disabled = false;
 });
 
 const stopBtn = document.querySelector('.btn-bar__btn--stop');
 
 stopBtn.addEventListener('click', () => {
     clearInterval(intervalID);
+    isIntervalOn = false;
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    pauseBtn.disabled = true;
+});
+
+const pauseBtn = document.querySelector('.btn-bar__btn--pause');
+
+pauseBtn.addEventListener('click', () => {
+    if (isIntervalOn) {
+        clearInterval(intervalID);
+        isIntervalOn = false;
+        pauseBtn.innerHTML = 'unpause';
+    } else {
+        nextStep();
+        intervalID = setInterval(nextStep, 1000);
+        isIntervalOn = true;
+        pauseBtn.innerHTML = 'pause';
+    }
 });

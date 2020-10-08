@@ -47,7 +47,23 @@
     border-radius: 6px; 
     text-transform: uppercase;
 }
+.btn-bar__btn--start:disabled {
+    color: #a39797;
+    border: 2px solid #a39797;
+}
 
+.btn-bar__btn--pause {
+    background: transparent; 
+    color: rgb(236, 139, 27);
+    border: 2px solid rgb(236, 139, 27);
+    ;
+    border-radius: 6px; 
+    text-transform: uppercase;
+}
+.btn-bar__btn--pause:disabled {
+    color: #a39797;
+    border: 2px solid #a39797;
+}
 .btn-bar__btn--stop {
     background: transparent; 
     color: turquoise;
@@ -55,7 +71,10 @@
     border-radius: 6px; 
     text-transform: uppercase;
 }
-
+.btn-bar__btn--stop:disabled {
+    color: #a39797;
+    border: 2px solid #a39797;
+}
   .fieldContainer {
       padding:24px;
 
