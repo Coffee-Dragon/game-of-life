@@ -14,7 +14,10 @@ for (let i=0; i<100; i++) {
 field.appendChild(fieldFrag);
 
 const startBtn = document.querySelector('.btn-bar__btn--start');
-
+/**
+ * Randomly attributes live class to div cells inside the playing field.
+ * Randomly fills liveOrDead and cells arrays.
+ */
 function seedLife() {
     for (let i=0; i < cells.length; i++) {
         const cell = cells[i];
@@ -92,38 +95,27 @@ const nextStep = () => {
         }
     }
     if (shouldStop || !hasLiveCells) {
-        clearInterval(intervalID);
-        isIntervalOn = false;
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
-        pauseBtn.disabled = true;
+        stop();
     }
 
     liveOrDead = nextAliveOrDead;
 }
 
-startBtn.addEventListener('click', () => {
-    seedLife();
+const start = () => {
     intervalID = setInterval(nextStep, 1000);
     isIntervalOn = true;
     startBtn.disabled = true;
     stopBtn.disabled = false;
     pauseBtn.disabled = false;
-});
-
-const stopBtn = document.querySelector('.btn-bar__btn--stop');
-
-stopBtn.addEventListener('click', () => {
+}
+const stop = () => {
     clearInterval(intervalID);
     isIntervalOn = false;
     startBtn.disabled = false;
     stopBtn.disabled = true;
     pauseBtn.disabled = true;
-});
-
-const pauseBtn = document.querySelector('.btn-bar__btn--pause');
-
-pauseBtn.addEventListener('click', () => {
+}
+const pauseUnpause = () => {
     if (isIntervalOn) {
         clearInterval(intervalID);
         isIntervalOn = false;
@@ -134,4 +126,17 @@ pauseBtn.addEventListener('click', () => {
         isIntervalOn = true;
         pauseBtn.innerHTML = 'pause';
     }
+}
+
+startBtn.addEventListener('click', () => {
+    seedLife();
+    start();
 });
+
+const stopBtn = document.querySelector('.btn-bar__btn--stop');
+
+stopBtn.addEventListener('click', stop);
+
+const pauseBtn = document.querySelector('.btn-bar__btn--pause');
+
+pauseBtn.addEventListener('click', pauseUnpause);
