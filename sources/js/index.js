@@ -1,5 +1,5 @@
 
-import {Cell} from "./cell.js";
+import {Cell} from "./Cell.js";
 
 const field = document.querySelector('.field');
 const fieldFrag = document.createDocumentFragment();
