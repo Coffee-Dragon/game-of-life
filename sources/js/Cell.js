@@ -1,6 +1,6 @@
 export class Cell {
     /** @param div {HTMLDivElement} HTML element that represents this cell on the UI */
-    constructor (div) {
+    constructor(div) {
         this.div = div;
         this.isAlive = false;
     }
