@@ -1,4 +1,4 @@
-class Cell {
+export class Cell {
     /** @param div {HTMLDivElement} HTML element that represents this cell on the UI */
     constructor (div) {
         this.div = div;

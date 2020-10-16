@@ -1,4 +1,6 @@
 
+import {Cell} from "./cell.js";
+
 const field = document.querySelector('.field');
 const fieldFrag = document.createDocumentFragment();
 const cells = [];
