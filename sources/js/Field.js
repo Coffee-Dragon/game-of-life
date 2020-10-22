@@ -1,10 +1,10 @@
 import {Cell} from "./Cell.js";
-
+/** creates game's playing field and life inside it*/
 export class Field {
     cells = [];
     cols = 10;
     rows = 10;
-    
+
     constructor(field) {
         const fieldFrag = document.createDocumentFragment();
         for (let i = 0; i < this.cols * this.rows; i++) {
